@@ -1,95 +1,61 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ed ede edek</title>
-  <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
-  <meta name="description" content="Oficjalna strona marki ed ede edek – trzy oblicza, neonowy vibe, muzyka i humor.">
-  <meta property="og:title" content="ed ede edek">
-  <meta property="og:description" content="Trzy oblicza. Neon. Muzyka. Humor.">
-  <meta property="og:image" content="/img/hero-trio.png">
-  <meta property="og:url" content="https://ededeedek.pl">
-  <meta name="twitter:card" content="summary_large_image">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      text-align: center;
-    }
-    header {
-      background: #111;
-      padding: 20px;
-    }
-    header img {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0,255,255,0.7);
-    }
-    .avatars {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin: 40px 0;
-      flex-wrap: wrap;
-    }
-    .avatar {
-      width: 200px;
-      text-align: center;
-    }
-    .avatar img {
-      width: 100%;
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(255,0,255,0.6);
-      transition: transform 0.3s;
-    }
-    .avatar img:hover {
-      transform: scale(1.05);
-    }
-    .avatar p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff;
-    }
-    footer {
-      background: #111;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #888;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ed ede edek</title>
+<!-- Uwaga: ścieżki BEZ poprzedzającego "/" (repo działa pod /edek/) -->
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+<meta name="description" content="Oficjalna strona marki ed ede edek – trzy oblicza, neonowy vibe, muzyka i humor." />
+<meta property="og:title" content="ed ede edek" />
+<meta property="og:description" content="Trzy oblicza. Neon. Muzyka. Humor." />
+<meta property="og:image" content="https://ededeedek.github.io/edek/img/hero-trio.png" />
+<meta property="og:url" content="https://ededeedek.github.io/edek/" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+:root { --glow: 0 0 25px rgba(0,255,255,.7); --glow-pink: 0 0 15px rgba(255,0,255,.6); }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #000; color: #fff; text-align: center; }
+header { background: #111; padding: 20px; }
+header img { max-width: 100%; border-radius: 12px; box-shadow: var(--glow); }
+.avatars { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
+.avatar { width: 200px; text-align: center; }
+.avatar img { width: 100%; border-radius: 50%; box-shadow: var(--glow-pink); transition: transform .3s; }
+.avatar img:hover { transform: scale(1.05); }
+.avatar p { margin-top: 10px; font-size: 1.1rem; color: #0ff; text-shadow: 0 0 10px #0ff; }
+footer { background: #111; padding: 20px; font-size: .9rem; color: #888; }
+</style>
 </head>
 <body>
-  <header>
-    <img src="/img/hero-trio.png" alt="ed ede edek">
-  </header>
+<header>
+<img src="img/hero-trio.png" alt="ed ede edek" />
+</header>
 
-  <section class="avatars">
-    <div class="avatar">
-      <a href="https://tiktok.com/@ededeedek" target="_blank">
-        <img src="/img/avatar-ed.png" alt="ed">
-        <p>ed</p>
-      </a>
-    </div>
-    <div class="avatar">
-      <a href="https://tiktok.com/@ededeedek" target="_blank">
-        <img src="/img/avatar-ede.png" alt="ede">
-        <p>ede</p>
-      </a>
-    </div>
-    <div class="avatar">
-      <a href="https://tiktok.com/@ededeedek" target="_blank">
-        <img src="/img/avatar-edek.png" alt="edek">
-        <p>edek</p>
-      </a>
-    </div>
-  </section>
 
-  <footer>
-    &copy; 2025 ed ede edek. Wszystkie prawa zastrzeżone.
-  </footer>
+<section class="avatars">
+<div class="avatar">
+<a href="https://tiktok.com/@ededeedek" target="_blank" rel="noopener">
+<img src="img/avatar-ed.png" alt="ed" />
+<p>ed</p>
+</a>
+</div>
+<div class="avatar">
+<a href="https://tiktok.com/@ededeedek" target="_blank" rel="noopener">
+<img src="img/avatar-ede.png" alt="ede" />
+<p>ede</p>
+</a>
+</div>
+<div class="avatar">
+<a href="https://tiktok.com/@ededeedek" target="_blank" rel="noopener">
+<img src="img/avatar-edek.png" alt="edek" />
+<p>edek</p>
+</a>
+</div>
+</section>
+
+
+<footer>
+&copy; 2025 ed ede edek. Wszystkie prawa zastrzeżone.
+</footer>
 </body>
 </html>
