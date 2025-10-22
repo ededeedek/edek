@@ -1,61 +1,246 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ed ede edek</title>
-<!-- Uwaga: ścieżki BEZ poprzedzającego "/" (repo działa pod /edek/) -->
-<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-<meta name="description" content="Oficjalna strona marki ed ede edek – trzy oblicza, neonowy vibe, muzyka i humor." />
-<meta property="og:title" content="ed ede edek" />
-<meta property="og:description" content="Trzy oblicza. Neon. Muzyka. Humor." />
-<meta property="og:image" content="https://ededeedek.github.io/edek/img/hero-trio.png" />
-<meta property="og:url" content="https://ededeedek.github.io/edek/" />
-<meta name="twitter:card" content="summary_large_image" />
-<style>
-:root { --glow: 0 0 25px rgba(0,255,255,.7); --glow-pink: 0 0 15px rgba(255,0,255,.6); }
-* { box-sizing: border-box; }
-body { margin: 0; font-family: Arial, sans-serif; background: #000; color: #fff; text-align: center; }
-header { background: #111; padding: 20px; }
-header img { max-width: 100%; border-radius: 12px; box-shadow: var(--glow); }
-.avatars { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
-.avatar { width: 200px; text-align: center; }
-.avatar img { width: 100%; border-radius: 50%; box-shadow: var(--glow-pink); transition: transform .3s; }
-.avatar img:hover { transform: scale(1.05); }
-.avatar p { margin-top: 10px; font-size: 1.1rem; color: #0ff; text-shadow: 0 0 10px #0ff; }
-footer { background: #111; padding: 20px; font-size: .9rem; color: #888; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>ededeedek — ed • ede • edek</title>
+  <meta name="description" content="edek: projekt muzyczno‑wizualny. ed • ede • edek — neon/RGB, bez kiczu." />
+  <link rel="canonical" href="https://ededeedek.pl/" />
+  <!-- Favicon / Icons (dodamy pliki w /assets) -->
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/assets/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <!-- OpenGraph / Twitter (uzupełnimy pod realne grafiki) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ededeedek.pl/" />
+  <meta property="og:title" content="ededeedek — ed • ede • edek" />
+  <meta property="og:description" content="edek: projekt muzyczno‑wizualny. ed • ede • edek — neon/RGB, bez kiczu." />
+  <meta property="og:image" content="/img/backgrounds/main-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ededeedek — ed • ede • edek" />
+  <meta name="twitter:description" content="edek: projekt muzyczno‑wizualny." />
+  <meta name="twitter:image" content="/img/backgrounds/main-og.png" />
+  <style>
+    /* --- Reset & base --- */
+    :root{
+      --bg:#0b0e13; /* ciemne tło */
+      --fg:#e8eef6; /* jasny tekst */
+      --muted:#9aa6b2;
+      --accent1:#00e5ff; /* neon cyan */
+      --accent2:#ff2dff; /* neon magenta */
+      --radius:1.25rem;
+      --maxw:1200px;
+      --pad:clamp(16px, 2vw, 32px);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+    .visually-hidden{position:absolute!important;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
+
+    /* --- Accent helpers --- */
+    .accent{background:linear-gradient(90deg,var(--accent2),var(--accent1));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .chip{display:inline-block;border:1px solid color-mix(in oklab, var(--accent1) 50%, var(--accent2) 50%);padding:.375rem .75rem;border-radius:999px;font-size:.875rem;letter-spacing:.02em}
+
+    /* --- Header / nav --- */
+    header{position:sticky;top:0;z-index:50;background:rgba(11,14,19,.75);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;gap:16px;min-height:64px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.02em}
+    .brand img{height:auto}
+    .brand .logo{width:clamp(96px,14vw,168px);height:auto;display:block}
+    .brand .wordmark{font-size:1.35rem;font-weight:800;letter-spacing:.02em}
+    nav{margin-left:auto}
+    nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+    nav a{padding:.5rem .9rem;border-radius:.8rem}
+    nav a:is(:hover,:focus-visible){outline:none;background:rgba(255,255,255,.06)}
+
+    /* Mobile nav simple stack */
+    @media (max-width:720px){
+      nav ul{flex-wrap:wrap}
+    }
+
+    /* --- Intro section (tło SVG + avatary) --- */
+    .intro{position:relative;isolation:isolate}
+    .intro::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(1200px 600px at 20% -10%, color-mix(in oklab,var(--accent2) 35%, transparent), transparent), radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--accent1) 35%, transparent), transparent);}
+    .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,48px);align-items:center;padding-block:clamp(36px,8vw,96px)}
+    @media (max-width:900px){.intro-grid{grid-template-columns:1fr;}}
+    .intro h1{font-size:clamp(28px,5vw,56px);line-height:1.05;margin:0 0 .6rem}
+    .intro p{color:var(--muted);max-width:60ch;margin:0 0 1rem}
+    .intro .avatars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}
+    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:clamp(12px,2vw,20px)}
+
+    /* --- Persona blocks --- */
+    section.persona{padding-block:clamp(36px,6vw,72px);border-top:1px solid rgba(255,255,255,.06)}
+    .persona .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:center}
+    @media (max-width:920px){.persona .wrap{grid-template-columns:1fr;}}
+    .persona h2{font-size:clamp(22px,3.4vw,38px);margin:0 0 .5rem}
+    .persona p{color:var(--muted);margin:0}
+
+    /* --- About & Contact --- */
+    .about,.contact{padding-block:clamp(36px,6vw,72px);border-top:1px solid rgba(255,255,255,.06)}
+    .about h2,.contact h2{font-size:clamp(22px,3.2vw,36px);margin:0 0 .4rem}
+
+    /* --- Palette preview (brand colors) --- */
+    .palette{padding-block:clamp(28px,5vw,56px);border-top:1px solid rgba(255,255,255,.06)}
+    .palette h2{font-size:clamp(20px,2.8vw,30px);margin:0 0 .75rem}
+    .swatches{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+    .swatch{flex:1 1 160px;min-width:160px;border-radius:.9rem;border:1px solid rgba(255,255,255,.08);padding:12px}
+    .swatch .box{height:48px;border-radius:.6rem;margin-bottom:8px}
+    .swatch .label{font-size:.9rem;color:var(--muted)}
+    .bar{height:16px;border-radius:999px;border:1px solid rgba(255,255,255,.08)}
+    .bar--brand{background:linear-gradient(90deg,var(--accent2),var(--accent1))}
+
+    /* --- Footer --- */
+    footer{border-top:1px solid rgba(255,255,255,.06);padding:20px 0;color:var(--muted);font-size:.9rem}
+
+    /* --- Motion preferences --- */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important}
+    }
+  </style>
 </head>
 <body>
-<header>
-<img src="img/hero-trio.png" alt="ed ede edek" />
-</header>
+  <a class="visually-hidden" href="#main">Przejdź do treści</a>
 
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="Strona główna — edek">
+        <img class="logo" src="/img/logos/edek.svg" alt="edek — logo" width="128" height="32" />
+      </a>
+      <nav aria-label="Główne menu">
+        <ul>
+          <li><a href="#ed">ed</a></li>
+          <li><a href="#ede">ede</a></li>
+          <li><a href="#edek">edek</a></li>
+          <li><a href="#about">O mnie</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<section class="avatars">
-<div class="avatar">
-<a href="https://tiktok.com/@ededeedek" target="_blank" rel="noopener">
-<img src="img/avatar-ed.png" alt="ed" />
-<p>ed</p>
-</a>
-</div>
-<div class="avatar">
-<a href="https://tiktok.com/@ededeedek" target="_blank" rel="noopener">
-<img src="img/avatar-ede.png" alt="ede" />
-<p>ede</p>
-</a>
-</div>
-<div class="avatar">
-<a href="https://tiktok.com/@ededeedek" target="_blank" rel="noopener">
-<img src="img/avatar-edek.png" alt="edek" />
-<p>edek</p>
-</a>
-</div>
-</section>
+  <main id="main">
+    <!-- Intro: nowa szata graficzna + avatary -->
+    <section class="intro">
+      <div class="container intro-grid">
+        <div>
+          <p class="chip">projekt • muzyka • wizuale</p>
+          <h1><span class="accent">edek</span> — dźwięk, obraz, rozmowa</h1>
+          <p>
+            Nowa odsłona strony. Neon/RGB, akcent w „d”. Zero kiczu.
+            Ten widok odwzorowuje układ z Canvy — dalej rozwiniemy treści
+            i dodamy zakładki.
+          </p>
+        </div>
+        <div class="avatars">
+          <figure class="card">
+            <img src="/img/avatars/ed.svg" alt="ed — avatar" loading="lazy" width="320" height="320" />
+          </figure>
+          <figure class="card">
+            <img src="/img/avatars/ede.svg" alt="ede — avatar" loading="lazy" width="320" height="320" />
+          </figure>
+          <figure class="card">
+            <img src="/img/avatars/edek.svg" alt="edek — avatar" loading="lazy" width="320" height="320" />
+          </figure>
+        </div>
+      </div>
+    </section>
 
+    <!-- Persona: Ed -->
+    <section id="ed" class="persona">
+      <div class="container wrap">
+        <div>
+          <h2>ed — humor / memiczny</h2>
+          <p>Krótki format, virale, lekkość. Publikacje dzienne, testy i skalowanie po wynikach.</p>
+        </div>
+        <div class="card">
+          <img src="/img/ui/opis-ed.svg" alt="Opis sekcji ed" loading="lazy" width="960" height="540" />
+        </div>
+      </div>
+    </section>
 
-<footer>
-&copy; 2025 ed ede edek. Wszystkie prawa zastrzeżone.
-</footer>
+    <!-- Persona: Ede -->
+    <section id="ede" class="persona">
+      <div class="container wrap">
+        <div>
+          <h2>ede — merytoryczny / filozoficzny</h2>
+          <p>Głębsza warstwa: wyjaśnienia, porządek, sens. Bez lawiny treści.</p>
+        </div>
+        <div class="card">
+          <img src="/img/ui/opis-ede.svg" alt="Opis sekcji ede" loading="lazy" width="960" height="540" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Persona: Edek -->
+    <section id="edek" class="persona">
+      <div class="container wrap">
+        <div>
+          <h2>edek — lider / muzyka / sarkazm</h2>
+          <p>Lider projektu. Muzyka, vibe, spójność wizualna. Akcent w „d”.</p>
+        </div>
+        <div class="card">
+          <img src="/img/ui/opis-edek.svg" alt="Opis sekcji edek" loading="lazy" width="960" height="540" />
+        </div>
+      </div>
+    </section>
+
+    <!-- O mnie -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2>O projekcie</h2>
+        <p>Tu dodamy krótkie intro i linki do sociali. Treści uzupełnimy w kolejnym kroku.</p>
+      </div>
+    </section>
+
+    <!-- Kolory i gradient (podgląd) -->
+    <section id="palette" class="palette" aria-labelledby="palette-title">
+      <div class="container">
+        <h2 id="palette-title">kolory i gradient (podgląd)</h2>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="box" style="background:var(--accent2)"></div>
+            <div class="label">akcent L → <strong>#ff2dff</strong> (magenta)</div>
+          </div>
+          <div class="swatch">
+            <div class="box" style="background:var(--accent1)"></div>
+            <div class="label">akcent P → <strong>#00e5ff</strong> (cyan)</div>
+          </div>
+        </div>
+        <div class="bar bar--brand" title="gradient: magenta → cyan"></div>
+      </div>
+    </section>
+
+    <!-- Kontakt (formularz w kolejnym etapie) -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Kontakt</h2>
+        <p>Napisz wiadomość — formularz wdrożymy w kroku „Zakładki i formularze”.</p>
+        <form action="#" method="post" aria-disabled="true">
+          <label class="visually-hidden" for="name">Imię</label>
+          <input id="name" name="name" type="text" placeholder="Imię" disabled>
+          <label class="visually-hidden" for="email">E‑mail</label>
+          <input id="email" name="email" type="email" placeholder="E‑mail" disabled>
+          <label class="visually-hidden" for="msg">Wiadomość</label>
+          <textarea id="msg" name="message" placeholder="Wiadomość" disabled></textarea>
+          <button type="button" disabled>Wyślij (wkrótce)</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> ededeedek — wszystkie prawa zastrzeżone
+    </div>
+  </footer>
+
+  <script>
+    // Rok w stopce
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
