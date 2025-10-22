@@ -95,6 +95,18 @@
     .bar{height:16px;border-radius:999px;border:1px solid rgba(255,255,255,.08)}
     .bar--brand{background:linear-gradient(90deg,var(--accent2),var(--accent1))}
 
+    /* --- Avatar sizing overrides (bigger thumbnails) --- */
+    /* Give more room to the right column on large screens */
+    @media (min-width:1000px){
+      .intro-grid{grid-template-columns:1fr 1fr}
+    }
+    /* Make each avatar cell at least 180px wide and center the images */
+    .intro .avatars{grid-template-columns:repeat(3,minmax(180px,1fr));justify-items:center}
+    /* Reduce padding of avatar cards so images look larger */
+    .intro .avatars .card{padding:8px;border-radius:16px}
+    /* Ensure the image itself grows to a sensible size regardless of column width */
+    .intro .avatars img{width:clamp(180px,20vw,240px);height:auto;aspect-ratio:1/1}
+
     /* --- Footer --- */
     footer{border-top:1px solid rgba(255,255,255,.06);padding:20px 0;color:var(--muted);font-size:.9rem}
 
