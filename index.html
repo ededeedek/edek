@@ -68,7 +68,7 @@
     @media (max-width:900px){.intro-grid{grid-template-columns:1fr;}}
     .intro h1{font-size:clamp(28px,5vw,56px);line-height:1.05;margin:0 0 .6rem}
     .intro p{color:var(--muted);max-width:60ch;margin:0 0 1rem}
-    .intro .avatars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}
+    .intro .avatars{grid-template-columns:repeat(3,minmax(220px,1fr));justify-items:center}
     .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:clamp(12px,2vw,20px)}
     /* Quick fix: blend zamiast białych kwadratów wokół avatarów */
     .intro .card{background:transparent;border:1px solid rgba(255,255,255,.12)}
@@ -105,8 +105,7 @@
     /* Reduce padding of avatar cards so images look larger */
     .intro .avatars .card{padding:8px;border-radius:16px}
     /* Ensure the image itself grows to a sensible size regardless of column width */
-    .intro .avatars img{width:clamp(180px,20vw,240px);height:auto;aspect-ratio:1/1}
-
+    .intro .avatars img{width:clamp(220px,22vw,300px);height:auto;aspect-ratio:1/1;object-fit:contain;border-radius:12px}
     /* --- Footer --- */
     footer{border-top:1px solid rgba(255,255,255,.06);padding:20px 0;color:var(--muted);font-size:.9rem}
 
