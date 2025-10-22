@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
   <title>ededeedek — ed • ede • edek</title>
   <meta name="description" content="edek: projekt muzyczno‑wizualny. ed • ede • edek — neon/RGB, bez kiczu." />
   <link rel="canonical" href="https://ededeedek.pl/" />
@@ -64,13 +63,16 @@
 
     /* --- Intro section (tło SVG + avatary) --- */
     .intro{position:relative;isolation:isolate}
-    .intro::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(1200px 600px at 20% -10%, color-mix(in oklab,var(--accent2) 35%, transparent), transparent), radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--accent1) 35%, transparent), transparent);}
+    .intro::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(1200px 600px at 20% -10%, color-mix(in oklab,var(--accent2) 35%, transparent), transparent), radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--accent1) 35%, transparent), transparent);} 
     .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,48px);align-items:center;padding-block:clamp(36px,8vw,96px)}
     @media (max-width:900px){.intro-grid{grid-template-columns:1fr;}}
     .intro h1{font-size:clamp(28px,5vw,56px);line-height:1.05;margin:0 0 .6rem}
     .intro p{color:var(--muted);max-width:60ch;margin:0 0 1rem}
     .intro .avatars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end}
     .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:clamp(12px,2vw,20px)}
+    /* Quick fix: blend zamiast białych kwadratów wokół avatarów */
+    .intro .card{background:transparent;border:1px solid rgba(255,255,255,.12)}
+    .avatars img{width:100%;aspect-ratio:1/1;object-fit:contain;mix-blend-mode:multiply;display:block;border-radius:12px}
 
     /* --- Persona blocks --- */
     section.persona{padding-block:clamp(36px,6vw,72px);border-top:1px solid rgba(255,255,255,.06)}
