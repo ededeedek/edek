@@ -1,259 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ededeedek — ed • ede • edek</title>
-  <meta name="description" content="edek: projekt muzyczno‑wizualny. ed • ede • edek — neon/RGB, bez kiczu." />
-  <link rel="canonical" href="https://ededeedek.pl/" />
-  <!-- Favicon / Icons (dodamy pliki w /assets) -->
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-  <link rel="alternate icon" href="/assets/favicon-32.png" sizes="32x32" />
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-  <!-- OpenGraph / Twitter (uzupełnimy pod realne grafiki) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ededeedek.pl/" />
-  <meta property="og:title" content="ededeedek — ed • ede • edek" />
-  <meta property="og:description" content="edek: projekt muzyczno‑wizualny. ed • ede • edek — neon/RGB, bez kiczu." />
-  <meta property="og:image" content="/img/backgrounds/main-og.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ededeedek — ed • ede • edek" />
-  <meta name="twitter:description" content="edek: projekt muzyczno‑wizualny." />
-  <meta name="twitter:image" content="/img/backgrounds/main-og.png" />
-  <style>
-    /* --- Reset & base --- */
-    :root{
-      --bg:#0b0e13; /* ciemne tło */
-      --fg:#e8eef6; /* jasny tekst */
-      --muted:#9aa6b2;
-      --accent1:#00e5ff; /* neon cyan */
-      --accent2:#ff2dff; /* neon magenta */
-      --radius:1.25rem;
-      --maxw:1200px;
-      --pad:clamp(16px, 2vw, 32px);
-    }
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
-    img{display:block;max-width:100%;height:auto}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
-    .visually-hidden{position:absolute!important;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
-
-    /* --- Accent helpers --- */
-    .accent{background:linear-gradient(90deg,var(--accent2),var(--accent1));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .chip{display:inline-block;border:1px solid color-mix(in oklab, var(--accent1) 50%, var(--accent2) 50%);padding:.375rem .75rem;border-radius:999px;font-size:.875rem;letter-spacing:.02em}
-
-    /* --- Header / nav --- */
-    header{position:sticky;top:0;z-index:50;background:rgba(11,14,19,.75);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex;align-items:center;gap:16px;min-height:64px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.02em}
-    .brand img{height:auto}
-    .brand .logo{width:clamp(96px,14vw,168px);height:auto;display:block}
-    .brand .wordmark{font-size:1.35rem;font-weight:800;letter-spacing:.02em}
-    nav{margin-left:auto}
-    nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:0}
-    nav a{padding:.5rem .9rem;border-radius:.8rem}
-    nav a:is(:hover,:focus-visible){outline:none;background:rgba(255,255,255,.06)}
-
-    /* Mobile nav simple stack */
-    @media (max-width:720px){
-      nav ul{flex-wrap:wrap}
-    }
-
-    /* --- Intro section (tło SVG + avatary) --- */
-    .intro{position:relative;isolation:isolate}
-    .intro::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(1200px 600px at 20% -10%, color-mix(in oklab,var(--accent2) 35%, transparent), transparent), radial-gradient(900px 500px at 80% 0%, color-mix(in oklab,var(--accent1) 35%, transparent), transparent);} 
-    .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,48px);align-items:center;padding-block:clamp(36px,8vw,96px)}
-    @media (max-width:900px){.intro-grid{grid-template-columns:1fr;}}
-    .intro h1{font-size:clamp(28px,5vw,56px);line-height:1.05;margin:0 0 .6rem}
-    .intro p{color:var(--muted);max-width:60ch;margin:0 0 1rem}
-    .intro .avatars{grid-template-columns:repeat(3,minmax(220px,1fr));justify-items:center}
-    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:clamp(12px,2vw,20px)}
-    /* Quick fix: blend zamiast białych kwadratów wokół avatarów */
-    .intro .card{background:transparent;border:1px solid rgba(255,255,255,.12)}
-    .avatars img{width:100%;aspect-ratio:1/1;object-fit:contain;mix-blend-mode:multiply;display:block;border-radius:12px}
-
-    /* --- Persona blocks --- */
-    section.persona{padding-block:clamp(36px,6vw,72px);border-top:1px solid rgba(255,255,255,.06)}
-    .persona .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:center}
-    @media (max-width:920px){.persona .wrap{grid-template-columns:1fr;}}
-    .persona h2{font-size:clamp(22px,3.4vw,38px);margin:0 0 .5rem}
-    .persona p{color:var(--muted);margin:0}
-
-    /* --- About & Contact --- */
-    .about,.contact{padding-block:clamp(36px,6vw,72px);border-top:1px solid rgba(255,255,255,.06)}
-    .about h2,.contact h2{font-size:clamp(22px,3.2vw,36px);margin:0 0 .4rem}
-
-    /* --- Palette preview (brand colors) --- */
-    .palette{padding-block:clamp(28px,5vw,56px);border-top:1px solid rgba(255,255,255,.06)}
-    .palette h2{font-size:clamp(20px,2.8vw,30px);margin:0 0 .75rem}
-    .swatches{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
-    .swatch{flex:1 1 160px;min-width:160px;border-radius:.9rem;border:1px solid rgba(255,255,255,.08);padding:12px}
-    .swatch .box{height:48px;border-radius:.6rem;margin-bottom:8px}
-    .swatch .label{font-size:.9rem;color:var(--muted)}
-    .bar{height:16px;border-radius:999px;border:1px solid rgba(255,255,255,.08)}
-    .bar--brand{background:linear-gradient(90deg,var(--accent2),var(--accent1))}
-
-    /* --- Avatar sizing overrides (bigger thumbnails) --- */
-    /* Give more room to the right column on large screens */
-    @media (min-width:1000px){
-      .intro-grid{grid-template-columns:1fr 1fr}
-    }
-    /* Make each avatar cell at least 180px wide and center the images */
-    .intro .avatars{grid-template-columns:repeat(3,minmax(180px,1fr));justify-items:center}
-    /* Reduce padding of avatar cards so images look larger */
-    .intro .avatars .card{padding:8px;border-radius:16px}
-    /* Ensure the image itself grows to a sensible size regardless of column width */
-    .intro .avatars img{width:clamp(220px,22vw,300px);height:auto;aspect-ratio:1/1;object-fit:contain;border-radius:12px}
-    /* --- Footer --- */
-    footer{border-top:1px solid rgba(255,255,255,.06);padding:20px 0;color:var(--muted);font-size:.9rem}
-
-    /* --- Motion preferences --- */
-    @media (prefers-reduced-motion: reduce){
-      *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ed Ede Edek - Platforma Muzyczna</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; }
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .neon-text { text-shadow: 0 0 10px rgba(139, 92, 246, 0.5); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Animacje dla osobowości */
+        .vibe-ed:hover { box-shadow: 0 0 20px #22c55e; border-color: #22c55e; } /* Green/Toxic */
+        .vibe-ede:hover { box-shadow: 0 0 20px #ef4444; border-color: #ef4444; } /* Red/Rebel */
+        .vibe-edek:hover { box-shadow: 0 0 20px #3b82f6; border-color: #3b82f6; } /* Blue/Royal */
+        
+        .active-ed { background: linear-gradient(45deg, rgba(34,197,94,0.1), transparent); border-color: #22c55e; }
+        .active-ede { background: linear-gradient(45deg, rgba(239,68,68,0.1), transparent); border-color: #ef4444; }
+        .active-edek { background: linear-gradient(45deg, rgba(59,130,246,0.1), transparent); border-color: #3b82f6; }
+    </style>
 </head>
 <body>
-  <a class="visually-hidden" href="#main">Przejdź do treści</a>
+    <div id="root"></div>
 
-  <header>
-    <div class="container nav">
-      <a class="brand" href="/" aria-label="Strona główna — edek">
-        <img class="logo" src="/edek_logo.svg" alt="edek — logo" width="128" height="32" />
-      </a>
-      <nav aria-label="Główne menu">
-        <ul>
-          <li><a href="#ed">ed</a></li>
-          <li><a href="#ede">ede</a></li>
-          <li><a href="#edek">edek</a></li>
-          <li><a href="#about">O mnie</a></li>
-          <li><a href="#contact">Kontakt</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // Baza danych utworów (Symulacja backendu)
+        const musicDatabase = [
+            { id: 1, title: "Dzieciak w sieci", artist: "Ed", vibe: "ED", mood: "Absurd & Glitch", duration: "2:45", cover: "🤪" },
+            { id: 2, title: "Guma Balonowa", artist: "Ed", vibe: "ED", mood: "Dopamina", duration: "3:10", cover: "🍬" },
+            { id: 3, title: "System Error", artist: "Ede", vibe: "EDE", mood: "Bunt & Hype", duration: "2:20", cover: "🔥" },
+            { id: 4, title: "Nocna Jazda", artist: "Ede", vibe: "EDE", mood: "Trap & Bass", duration: "3:05", cover: "🏎️" },
+            { id: 5, title: "Horyzont Zdarzeń", artist: "Edek", vibe: "EDEK", mood: "Mentor & Głebia", duration: "4:12", cover: "🥃" },
+            { id: 6, title: "Stary Jazzman", artist: "Edek", vibe: "EDEK", mood: "Klasa & Vibe", duration: "3:45", cover: "🎷" },
+        ];
 
-  <main id="main">
-    <!-- Intro: nowa szata graficzna + avatary -->
-    <section class="intro">
-      <div class="container intro-grid">
-        <div>
-          <p class="chip">projekt • muzyka • wizuale</p>
-          <h1><span class="accent">edek</span> — dźwięk, obraz, rozmowa</h1>
-          <p>
-            Nowa odsłona strony. Neon/RGB, akcent w „d”. Zero kiczu.
-            Ten widok odwzorowuje układ z Canvy — dalej rozwiniemy treści
-            i dodamy zakładki.
-          </p>
-        </div>
-        <div class="avatars">
-          <figure class="card">
-            <img src="/img/avatars/ed.svg" alt="ed — avatar" loading="lazy" width="320" height="320" />
-          </figure>
-          <figure class="card">
-            <img src="/img/avatars/ede.svg" alt="ede — avatar" loading="lazy" width="320" height="320" />
-          </figure>
-          <figure class="card">
-            <img src="/img/avatars/edek.svg" alt="edek — avatar" loading="lazy" width="320" height="320" />
-          </figure>
-        </div>
-      </div>
-    </section>
+        const App = () => {
+            const [activeVibe, setActiveVibe] = useState('ALL'); // ALL, ED, EDE, EDEK
+            const [currentTrack, setCurrentTrack] = useState(null);
+            const [isPlaying, setIsPlaying] = useState(false);
 
-    <!-- Persona: Ed -->
-    <section id="ed" class="persona">
-      <div class="container wrap">
-        <div>
-          <h2>ed — humor / memiczny</h2>
-          <p>Krótki format, virale, lekkość. Publikacje dzienne, testy i skalowanie po wynikach.</p>
-        </div>
-        <div class="card">
-          <img src="/img/ui/opis-ed.svg" alt="Opis sekcji ed" loading="lazy" width="960" height="540" />
-        </div>
-      </div>
-    </section>
+            // Filtrowanie muzyki
+            const filteredMusic = activeVibe === 'ALL' 
+                ? musicDatabase 
+                : musicDatabase.filter(track => track.vibe === activeVibe);
 
-    <!-- Persona: Ede -->
-    <section id="ede" class="persona">
-      <div class="container wrap">
-        <div>
-          <h2>ede — merytoryczny / filozoficzny</h2>
-          <p>Głębsza warstwa: wyjaśnienia, porządek, sens. Bez lawiny treści.</p>
-        </div>
-        <div class="card">
-          <img src="/img/ui/opis-ede.svg" alt="Opis sekcji ede" loading="lazy" width="960" height="540" />
-        </div>
-      </div>
-    </section>
+            const handlePlay = (track) => {
+                setCurrentTrack(track);
+                setIsPlaying(true);
+            };
 
-    <!-- Persona: Edek -->
-    <section id="edek" class="persona">
-      <div class="container wrap">
-        <div>
-          <h2>edek — lider / muzyka / sarkazm</h2>
-          <p>Lider projektu. Muzyka, vibe, spójność wizualna. Akcent w „d”.</p>
-        </div>
-        <div class="card">
-          <img src="/img/ui/opis-edek.svg" alt="Opis sekcji edek" loading="lazy" width="960" height="540" />
-        </div>
-      </div>
-    </section>
+            const togglePlayPause = () => {
+                setIsPlaying(!isPlaying);
+            };
 
-    <!-- O mnie -->
-    <section id="about" class="about">
-      <div class="container">
-        <h2>O projekcie</h2>
-        <p>Tu dodamy krótkie intro i linki do sociali. Treści uzupełnimy w kolejnym kroku.</p>
-      </div>
-    </section>
+            return (
+                <div className="min-h-screen flex flex-col pb-24">
+                    {/* Header / Top Bar */}
+                    <nav className="p-6 flex justify-between items-center glass-panel sticky top-0 z-50">
+                        <div className="text-2xl font-black tracking-tighter">
+                            ED <span className="text-purple-500">EDE</span> EDEK
+                        </div>
+                        <div className="hidden md:flex gap-6 text-sm text-gray-400 font-medium">
+                            <a href="#" className="hover:text-white transition">PLATFORMA</a>
+                            <a href="#" className="hover:text-white transition">O NAS</a>
+                            <a href="#" className="hover:text-white transition">WSPÓŁPRACA</a>
+                        </div>
+                        <button className="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition">
+                            ZALOGUJ
+                        </button>
+                    </nav>
 
-    <!-- Kolory i gradient (podgląd) -->
-    <section id="palette" class="palette" aria-labelledby="palette-title">
-      <div class="container">
-        <h2 id="palette-title">kolory i gradient (podgląd)</h2>
-        <div class="swatches">
-          <div class="swatch">
-            <div class="box" style="background:var(--accent2)"></div>
-            <div class="label">akcent L → <strong>#ff2dff</strong> (magenta)</div>
-          </div>
-          <div class="swatch">
-            <div class="box" style="background:var(--accent1)"></div>
-            <div class="label">akcent P → <strong>#00e5ff</strong> (cyan)</div>
-          </div>
-        </div>
-        <div class="bar bar--brand" title="gradient: magenta → cyan"></div>
-      </div>
-    </section>
+                    {/* Hero Section - The Strategy Definition */}
+                    <header className="px-6 py-12 md:py-20 max-w-7xl mx-auto w-full">
+                        <h1 className="text-4xl md:text-7xl font-black mb-6 leading-tight">
+                            LEKARSTWO <br/>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                                MUZYCZNE
+                            </span>
+                        </h1>
+                        <p className="text-gray-400 text-lg md:text-xl max-w-2xl mb-8">
+                            Nie pytamy, jakiej muzyki słuchasz. Pytamy, jak się teraz czujesz.
+                            Wybierz swój stan świadomości.
+                        </p>
+                    </header>
 
-    <!-- Kontakt (formularz w kolejnym etapie) -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2>Kontakt</h2>
-        <p>Napisz wiadomość — formularz wdrożymy w kroku „Zakładki i formularze”.</p>
-        <form action="#" method="post" aria-disabled="true">
-          <label class="visually-hidden" for="name">Imię</label>
-          <input id="name" name="name" type="text" placeholder="Imię" disabled>
-          <label class="visually-hidden" for="email">E‑mail</label>
-          <input id="email" name="email" type="email" placeholder="E‑mail" disabled>
-          <label class="visually-hidden" for="msg">Wiadomość</label>
-          <textarea id="msg" name="message" placeholder="Wiadomość" disabled></textarea>
-          <button type="button" disabled>Wyślij (wkrótce)</button>
-        </form>
-      </div>
-    </section>
-  </main>
+                    {/* Vibe Selector - The Core Navigation */}
+                    <section className="px-6 max-w-7xl mx-auto w-full mb-12">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {/* ED CARD */}
+                            <div 
+                                onClick={() => setActiveVibe('ED')}
+                                className={`p-8 rounded-2xl border border-gray-800 cursor-pointer transition-all duration-300 vibe-ed group ${activeVibe === 'ED' ? 'active-ed' : 'bg-[#0a0a0a]'}`}
+                            >
+                                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🤪</div>
+                                <h2 className="text-2xl font-bold mb-2">ED (The Kid)</h2>
+                                <p className="text-sm text-gray-400">Wewnętrzne dziecko. Absurd, humor, dopamina. Reset głowy.</p>
+                            </div>
 
-  <footer>
-    <div class="container">
-      © <span id="y"></span> ededeedek — wszystkie prawa zastrzeżone
-    </div>
-  </footer>
+                            {/* EDE CARD */}
+                            <div 
+                                onClick={() => setActiveVibe('EDE')}
+                                className={`p-8 rounded-2xl border border-gray-800 cursor-pointer transition-all duration-300 vibe-ede group ${activeVibe === 'EDE' ? 'active-ede' : 'bg-[#0a0a0a]'}`}
+                            >
+                                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🔥</div>
+                                <h2 className="text-2xl font-bold mb-2">EDE (The Rebel)</h2>
+                                <p className="text-sm text-gray-400">Buntownik i energia. Siła, "tu i teraz", hype, pęd.</p>
+                            </div>
 
-  <script>
-    // Rok w stopce
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+                            {/* EDEK CARD */}
+                            <div 
+                                onClick={() => setActiveVibe('EDEK')}
+                                className={`p-8 rounded-2xl border border-gray-800 cursor-pointer transition-all duration-300 vibe-edek group ${activeVibe === 'EDEK' ? 'active-edek' : 'bg-[#0a0a0a]'}`}
+                            >
+                                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🥃</div>
+                                <h2 className="text-2xl font-bold mb-2">EDEK (The Boss)</h2>
+                                <p className="text-sm text-gray-400">Świadomość i jakość. Muzyka z głębią dla dojrzałych mentalnie.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Track List */}
+                    <section className="px-6 max-w-7xl mx-auto w-full flex-grow">
+                        <div className="flex justify-between items-end mb-6">
+                            <h3 className="text-xl font-bold text-gray-200">
+                                {activeVibe === 'ALL' ? 'WSZYSTKIE UTWORY' : `STREFA: ${activeVibe}`}
+                            </h3>
+                            {activeVibe !== 'ALL' && (
+                                <button onClick={() => setActiveVibe('ALL')} className="text-sm text-purple-400 hover:text-purple-300">
+                                    Pokaż wszystko
+                                </button>
+                            )}
+                        </div>
+                        
+                        <div className="space-y-2">
+                            {filteredMusic.map((track) => (
+                                <div 
+                                    key={track.id} 
+                                    onClick={() => handlePlay(track)}
+                                    className={`flex items-center p-4 rounded-lg cursor-pointer group hover:bg-white/10 transition ${currentTrack?.id === track.id ? 'bg-white/10' : 'bg-white/5'}`}
+                                >
+                                    <div className="text-2xl mr-4 opacity-80">{track.cover}</div>
+                                    <div className="flex-grow">
+                                        <div className={`font-bold ${currentTrack?.id === track.id ? 'text-purple-400' : 'text-white'}`}>
+                                            {track.title}
+                                        </div>
+                                        <div className="text-xs text-gray-400">{track.artist} • {track.mood}</div>
+                                    </div>
+                                    <div className="text-sm text-gray-500 font-mono group-hover:text-white">
+                                        {track.duration}
+                                    </div>
+                                    <div className="ml-4 opacity-0 group-hover:opacity-100 transition text-purple-400">
+                                        ▶
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Sticky Footer Player */}
+                    {currentTrack && (
+                        <div className="fixed bottom-0 left-0 w-full glass-panel border-t border-gray-800 p-4 animate-slide-up">
+                            <div className="max-w-7xl mx-auto flex items-center justify-between">
+                                <div className="flex items-center">
+                                    <div className="w-12 h-12 bg-gray-800 rounded flex items-center justify-center text-xl mr-4">
+                                        {currentTrack.cover}
+                                    </div>
+                                    <div>
+                                        <div className="font-bold text-sm">{currentTrack.title}</div>
+                                        <div className="text-xs text-gray-400">{currentTrack.artist}</div>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex flex-col items-center w-1/3">
+                                    <div className="flex gap-4 mb-1">
+                                        <button className="text-gray-400 hover:text-white">⏮</button>
+                                        <button 
+                                            onClick={togglePlayPause}
+                                            className="w-8 h-8 flex items-center justify-center bg-white text-black rounded-full hover:scale-105 transition"
+                                        >
+                                            {isPlaying ? '⏸' : '▶'}
+                                        </button>
+                                        <button className="text-gray-400 hover:text-white">⏭</button>
+                                    </div>
+                                    <div className="w-full h-1 bg-gray-700 rounded-full mt-2 relative">
+                                        <div className="absolute top-0 left-0 h-full bg-purple-500 w-1/3 rounded-full"></div>
+                                    </div>
+                                </div>
+                                
+                                <div className="hidden md:block w-32">
+                                    <div className="text-xs text-gray-500 text-right">0:45 / {currentTrack.duration}</div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
 </html>
