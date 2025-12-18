@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ed Ede Edek | Platforma Muzyczna</title>
     
-    <!-- React & Tailwind -->
+    <!-- React & Tailwind (Niezbędne silniki) -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Ikony -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Fonty -->
+    <!-- Fonty: Oswald (Nagłówki) + Inter (Tekst) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -22,7 +19,7 @@
         h1, h2, h3, .brand-font { font-family: 'Oswald', sans-serif; }
         
         /* Glassmorphism */
-        .glass-panel { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-panel { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
         .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         
         /* OSOBOWOŚCI - VIBE COLORS */
@@ -47,16 +44,21 @@
             border-color: var(--glow);
         }
 
-        /* WATERMARK LOGO (Decyzja 2C) */
-        .watermark {
+        /* WATERMARK LOGO */
+        .watermark-container {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70vw;
-            opacity: 0.04;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             pointer-events: none;
             z-index: 0;
+            overflow: hidden;
+        }
+        .watermark-img {
+            width: 80%;
+            max-width: 800px;
+            opacity: 0.05;
             filter: blur(1px);
         }
 
@@ -71,7 +73,7 @@
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #222; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
-        /* Ukrywanie scrollbara dla estetyki */
+        /* Ukrywanie scrollbara */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
@@ -83,18 +85,43 @@
 
     <script type="text/babel">
         const { useState, useEffect } = React;
-        const { Play, Pause, Youtube, Instagram, Music, Share2, Info, X, Menu, ShieldCheck, Mail } = lucide;
+
+        // --- IKONY SVG (Hardcoded dla stabilności) ---
+        const IconYoutube = ({size=24}) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+        );
+        const IconMenu = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        );
+        const IconX = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        );
+        const IconPlay = () => (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        );
+        const IconInstagram = ({size=24}) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        );
+        const IconMusic = ({size=24}) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        );
+        const IconShield = () => (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+        );
+        const IconMail = () => (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        );
 
         // --- ZASOBY (ASSETS) ---
-        // SZEFIE: Upewnij się, że pliki na GitHubie mają te nazwy!
+        // PAMIĘTAJ: Te pliki muszą być w folderze głównym
         const ASSETS = {
-            ed: "./ed.png",    // Plik avatara ED
-            ede: "./ede.png",  // Plik avatara EDE
-            edek: "./edek.png",// Plik avatara EDEK
-            logo: "./logo.png" // Plik LOGO
+            ed: "./ed.png",    
+            ede: "./ede.png",  
+            edek: "./edek.png",
+            logo: "./logo.png" 
         };
 
-        // --- BAZA DANYCH (Zaktualizowana wg Twojej listy) ---
+        // --- BAZA DANYCH (Poprawione linki) ---
         const musicDatabase = [
             // --- EDEK (The Mentor) ---
             { id: 101, artist: "Edek", title: "Testarossa", vibe: "EDEK", desc: "Hybrid Trap / Polish Rap", videoId: "TNOzKsX4G6s", cover: "🥃" },
@@ -127,7 +154,6 @@
 
             const handlePlay = (track) => {
                 setCurrentTrack(track);
-                // Scrolluj trochę wyżej niż top, żeby nie uciekło pod navbar
                 const element = document.getElementById('player-anchor');
                 if(element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             };
@@ -142,8 +168,8 @@
                 <div className="min-h-screen flex flex-col relative font-sans">
                     
                     {/* WATERMARK BACKGROUND */}
-                    <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-0 opacity-5">
-                        <img src={ASSETS.logo} alt="" className="w-full max-w-4xl opacity-50 blur-sm" onError={(e) => e.target.style.display='none'} />
+                    <div className="watermark-container">
+                        <img src={ASSETS.logo} alt="" className="watermark-img" onError={(e) => e.target.style.display='none'} />
                     </div>
 
                     {/* --- NAVBAR --- */}
@@ -163,10 +189,10 @@
 
                         <div className="flex gap-4">
                             <a href="https://www.youtube.com/@ed-ede-edek?sub_confirmation=1" target="_blank" className="hidden md:flex bg-red-600 px-4 py-2 rounded font-bold text-xs items-center gap-2 hover:bg-red-700 transition shadow-lg shadow-red-900/20">
-                                <Youtube size={16} /> SUBSKRYBUJ
+                                <IconYoutube size={16} /> SUBSKRYBUJ
                             </a>
                             <button className="md:hidden text-white p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                                {isMenuOpen ? <X /> : <Menu />}
+                                {isMenuOpen ? <IconX /> : <IconMenu />}
                             </button>
                         </div>
                     </nav>
@@ -200,7 +226,6 @@
                             {/* ED */}
                             <div onClick={() => setActiveVibe('ED')} className={`group cursor-pointer flex flex-col items-center transition-all duration-500 relative vibe-ed ${activeVibe === 'ED' ? 'scale-105' : ''}`}>
                                 <div className={`w-full aspect-[3/4] rounded-2xl overflow-hidden border-2 transition-all duration-500 bg-[#0a0a0a] ${activeVibe === 'ED' ? 'persona-active border-green-500' : 'persona-ghost border-gray-800'}`}>
-                                    {/* Obrazek - fallback do placeholdera jeśli brak pliku */}
                                     <img src={ASSETS.ed} 
                                          onError={(e)=>{e.target.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=22c55e'}} 
                                          alt="ED" className="w-full h-full object-cover" />
@@ -247,7 +272,7 @@
                         {/* Aktywny Odtwarzacz */}
                         {currentTrack && (
                             <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                <div className="bg-[#0f0f0f] border border-gray-800 rounded-2xl p-4 md:p-6 shadow-2xl">
+                                <div className="bg-[#0f0f0f] border border-gray-800 rounded-2xl p-4 md:p-6 shadow-2xl relative">
                                     <div className="flex justify-between items-start mb-4">
                                         <div>
                                             <div className="text-purple-500 text-[10px] font-bold tracking-widest uppercase mb-1">Teraz Odtwarzane</div>
@@ -255,7 +280,7 @@
                                             <p className="text-sm text-gray-400">{currentTrack.artist} • {currentTrack.desc}</p>
                                         </div>
                                         <button onClick={() => setCurrentTrack(null)} className="p-2 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition">
-                                            <X size={20}/>
+                                            <IconX />
                                         </button>
                                     </div>
                                     <div className="video-container">
@@ -293,8 +318,8 @@
                                         <h4 className={`font-bold truncate text-sm md:text-base ${currentTrack?.id === track.id ? 'text-purple-400' : 'text-white'}`}>{track.title}</h4>
                                         <p className="text-xs text-gray-500 uppercase tracking-wider truncate">{track.artist} • {track.desc}</p>
                                     </div>
-                                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <Play size={16} className="text-purple-400 fill-purple-400" />
+                                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-purple-400">
+                                        <IconPlay />
                                     </div>
                                 </div>
                             ))}
@@ -311,7 +336,7 @@
                                 <a href="https://www.youtube.com/@ed-ede-edek?sub_confirmation=1" target="_blank" className="col-span-1 md:col-span-2 bg-gradient-to-r from-red-600 to-red-900 p-8 rounded-2xl flex items-center justify-between hover:scale-[1.01] transition shadow-2xl shadow-red-900/20 group cursor-pointer border border-red-500/30">
                                     <div className="text-left">
                                         <div className="flex items-center gap-2 text-white/80 mb-2 font-bold text-xs uppercase tracking-widest">
-                                            <Youtube size={16} /> Oficjalny Kanał
+                                            <IconYoutube size={16} /> Oficjalny Kanał
                                         </div>
                                         <h3 className="text-2xl md:text-4xl font-black text-white">ED EDE EDEK</h3>
                                         <p className="text-sm text-white/60 mt-1">Premiery, teledyski i kulisy.</p>
@@ -323,7 +348,7 @@
 
                                 <div className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 group opacity-50 hover:opacity-100 transition cursor-not-allowed" title="Coming Soon">
                                     <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center border border-gray-800">
-                                        <Music size={20} />
+                                        <IconMusic size={20} />
                                     </div>
                                     <span className="font-bold">TIKTOK</span>
                                     <span className="text-xs text-gray-500">WKRÓTCE</span>
@@ -331,7 +356,7 @@
 
                                 <div className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 group opacity-50 hover:opacity-100 transition cursor-not-allowed" title="Coming Soon">
                                     <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center border border-gray-800">
-                                        <Instagram size={20} />
+                                        <IconInstagram size={20} />
                                     </div>
                                     <span className="font-bold">INSTAGRAM</span>
                                     <span className="text-xs text-gray-500">WKRÓTCE</span>
@@ -350,7 +375,7 @@
                             
                             {/* CERTYFIKAT ORYGINALNOŚCI */}
                             <div className="flex items-center gap-2 border border-yellow-500/20 bg-yellow-500/5 px-4 py-2 rounded-full">
-                                <ShieldCheck size={16} className="text-yellow-500" />
+                                <IconShield />
                                 <span className="text-xs font-bold badge-verified uppercase tracking-widest">
                                     Certified Human & AI Hybrid Art
                                 </span>
@@ -365,7 +390,7 @@
                             <div className="flex justify-center gap-6">
                                 <a href="#" className="hover:text-white transition">Regulamin</a>
                                 <a href="#" className="hover:text-white transition">Polityka Prywatności</a>
-                                <a href="mailto:contact@ededeedek.pl" className="hover:text-white transition flex items-center gap-1"><Mail size={12}/> Kontakt</a>
+                                <a href="mailto:contact@ededeedek.pl" className="hover:text-white transition flex items-center gap-1"><IconMail /> Kontakt</a>
                             </div>
                             <p className="mt-4">© 2025 Ed Ede Edek. Wszelkie prawa zastrzeżone.</p>
                         </div>
