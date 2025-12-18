@@ -5,29 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ed Ede Edek | Platforma Muzyczna</title>
     
-    <!-- React & Tailwind (Niezbędne silniki) -->
+    <!-- React & Tailwind -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fonty: Oswald (Nagłówki) + Inter (Tekst) -->
+    <!-- Fonty -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #030303; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         h1, h2, h3, .brand-font { font-family: 'Oswald', sans-serif; }
         
-        /* Glassmorphism */
         .glass-panel { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
         .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; }
         
-        /* OSOBOWOŚCI - VIBE COLORS */
         .vibe-ed { --glow: #22c55e; }   /* Toxic Green */
         .vibe-ede { --glow: #ef4444; }  /* Rebel Red */
         .vibe-edek { --glow: #3b82f6; } /* Royal Blue */
 
-        /* GHOST EFFECT (Decyzja 1C) */
+        /* GHOST EFFECT */
         .persona-ghost {
             filter: grayscale(100%) brightness(0.7) contrast(1.2);
             opacity: 0.6;
@@ -62,7 +60,6 @@
             filter: blur(1px);
         }
 
-        /* Badge Oryginalności */
         .badge-verified {
             background: linear-gradient(45deg, #FFD700, #FDB931);
             -webkit-background-clip: text;
@@ -73,11 +70,9 @@
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid #222; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
-        /* Ukrywanie scrollbara */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
     </style>
 </head>
 <body>
@@ -86,7 +81,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- IKONY SVG (Hardcoded dla stabilności) ---
+        // --- IKONY SVG ---
         const IconYoutube = ({size=24}) => (
             <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
         );
@@ -113,7 +108,7 @@
         );
 
         // --- ZASOBY (ASSETS) ---
-        // PAMIĘTAJ: Te pliki muszą być w folderze głównym
+        // ZMIANA: Szukamy plików LUZEM (bez folderu)
         const ASSETS = {
             ed: "./ed.png",    
             ede: "./ede.png",  
@@ -121,7 +116,7 @@
             logo: "./logo.png" 
         };
 
-        // --- BAZA DANYCH (Poprawione linki) ---
+        // --- BAZA DANYCH ---
         const musicDatabase = [
             // --- EDEK (The Mentor) ---
             { id: 101, artist: "Edek", title: "Testarossa", vibe: "EDEK", desc: "Hybrid Trap / Polish Rap", videoId: "TNOzKsX4G6s", cover: "🥃" },
@@ -365,7 +360,7 @@
                         </div>
                     </div>
 
-                    {/* --- STOPKA (Opcja C z certyfikatem) --- */}
+                    {/* --- STOPKA --- */}
                     <footer id="footer" className="py-12 text-center text-gray-600 text-sm bg-black border-t border-gray-900 relative z-20">
                         <div className="flex flex-col items-center gap-4 mb-8">
                             {/* LOGO STOPKA */}
