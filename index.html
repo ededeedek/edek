@@ -328,6 +328,7 @@
                             <p className="text-gray-500 mb-8 max-w-lg mx-auto">Muzyka to dopiero początek. Dołącz do społeczności, która nie boi się emocji.</p>
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* GŁÓWNY - YOUTUBE */}
                                 <a href="https://www.youtube.com/@ed-ede-edek?sub_confirmation=1" target="_blank" className="col-span-1 md:col-span-2 bg-gradient-to-r from-red-600 to-red-900 p-8 rounded-2xl flex items-center justify-between hover:scale-[1.01] transition shadow-2xl shadow-red-900/20 group cursor-pointer border border-red-500/30">
                                     <div className="text-left">
                                         <div className="flex items-center gap-2 text-white/80 mb-2 font-bold text-xs uppercase tracking-widest">
@@ -341,21 +342,23 @@
                                     </div>
                                 </a>
 
-                                <div className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 group opacity-50 hover:opacity-100 transition cursor-not-allowed" title="Coming Soon">
-                                    <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center border border-gray-800">
+                                {/* TIKTOK (AKTYWNY) */}
+                                <a href="https://www.tiktok.com/@ededeedek?_r=1&_t=ZN-92KsrZ7J5Pf" target="_blank" className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 group transition cursor-pointer">
+                                    <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center border border-gray-800 group-hover:border-purple-500 transition">
                                         <IconMusic size={20} />
                                     </div>
                                     <span className="font-bold">TIKTOK</span>
-                                    <span className="text-xs text-gray-500">WKRÓTCE</span>
-                                </div>
+                                    <span className="text-xs text-gray-500 group-hover:text-purple-400 transition">Shorts & Virals</span>
+                                </a>
 
-                                <div className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 group opacity-50 hover:opacity-100 transition cursor-not-allowed" title="Coming Soon">
-                                    <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center border border-gray-800">
+                                {/* INSTAGRAM (AKTYWNY) */}
+                                <a href="https://www.instagram.com/ededeedek?igsh=emYwbWllcWc5czV4&utm_source=qr" target="_blank" className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-2 hover:bg-white/5 group transition cursor-pointer">
+                                    <div className="bg-black w-12 h-12 rounded-full flex items-center justify-center border border-gray-800 group-hover:border-pink-500 transition">
                                         <IconInstagram size={20} />
                                     </div>
                                     <span className="font-bold">INSTAGRAM</span>
-                                    <span className="text-xs text-gray-500">WKRÓTCE</span>
-                                </div>
+                                    <span className="text-xs text-gray-500 group-hover:text-pink-400 transition">Lifestyle & Backstage</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -399,6 +402,5 @@
     </script>
 </body>
 </html>
-
 
 
