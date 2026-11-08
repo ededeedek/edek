@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "source": "AI Studio owner-provided report 2026-11-07; candidates only",
+  "note": "Public status and video IDs NOT independently verified. Do not publish preview records as confirmed releases.",
+  "items": [
+    {
+      "key": "dopoki-lecimy",
+      "title": "Dopóki lecimy",
+      "style": "Refleksja / Bass",
+      "persona": null,
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "count-the-few",
+      "title": "COUNT THE FEW",
+      "style": "Rap / EN",
+      "persona": null,
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "nowa-era",
+      "title": "NOWA ERA",
+      "style": "Cyber-rap / Manifest",
+      "persona": null,
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "testarossa",
+      "title": "DRIFT i BASS",
+      "style": "Drift / Bass",
+      "persona": "ede",
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "rozbijam-mur",
+      "title": "Rozbijam ten mur",
+      "style": "Rap / Mroczny",
+      "persona": null,
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "code-zero",
+      "title": "CODE ZERO",
+      "style": "Industrial / Tech-Rap",
+      "persona": "ede",
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "gazzzolina",
+      "title": "GAZZZOLINA",
+      "style": "Reggaeton / Klubowy",
+      "persona": null,
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "moj-czas",
+      "title": "MÓJ CZAS",
+      "style": "Blues-Rock / Rap",
+      "persona": null,
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    },
+    {
+      "key": "zgubilem",
+      "title": "Zgubiłem się w Twej pamięci",
+      "style": "Alternatywny Dance",
+      "persona": null,
+      "visibility": "pending",
+      "thumbnail": null,
+      "platforms": {
+        "youtube": null,
+        "spotify": null,
+        "appleMusic": null,
+        "youtubeMusic": null
+      }
+    }
+  ]
+}
